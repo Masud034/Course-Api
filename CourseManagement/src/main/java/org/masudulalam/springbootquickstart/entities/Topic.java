@@ -1,10 +1,15 @@
 package org.masudulalam.springbootquickstart.entities;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 public class Topic {
@@ -12,7 +17,9 @@ public class Topic {
     @GeneratedValue(generator = "system-uuid")
     @GenericGenerator(name = "system-uuid", strategy = "uuid2")
     private String id;
+    @NotEmpty
     private String name;
+    @NotEmpty
     private String description;
 
     public Topic(){

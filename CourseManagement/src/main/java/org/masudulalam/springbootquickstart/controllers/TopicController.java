@@ -3,10 +3,15 @@ package org.masudulalam.springbootquickstart.controllers;
 import org.masudulalam.springbootquickstart.entities.Topic;
 import org.masudulalam.springbootquickstart.services.TopicService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
+@Validated
 @RestController
 public class TopicController {
 
@@ -14,27 +19,28 @@ public class TopicController {
     private TopicService topicService;
 
     @GetMapping(value = "/topics")
-    public List<Topic> getAllTopics(){
-        return topicService.getTopics();
+    public ResponseEntity<List<Topic>> getAllTopics(){
+        return new ResponseEntity(topicService.getTopics(), HttpStatus.OK);
     }
 
     @GetMapping(value = "/topics/{id}")
-    public Topic getTopic(@PathVariable String id){
-        return topicService.getTopic(id);
+    public ResponseEntity<Topic> getTopic(@PathVariable String id){
+        return new ResponseEntity(topicService.getTopic(id),HttpStatus.OK);
     }
 
     @PostMapping(value = "/topics")
-    public void addTopic(@RequestBody Topic topic){
-        topicService.addTopic(topic);
+    public ResponseEntity<Topic> addTopic(@Valid @RequestBody Topic topic){
+        return new ResponseEntity(topicService.addTopic(topic),HttpStatus.CREATED);
     }
 
     @PutMapping(value = "/topics/{id}")
-    public void updateTopic(@RequestBody Topic topic, @PathVariable String id){
-        topicService.updateTopic(topic, id);
+    public ResponseEntity<Topic> updateTopic(@RequestBody Topic topic, @PathVariable String id){
+        return new ResponseEntity(topicService.updateTopic(topic, id),HttpStatus.OK);
     }
 
     @DeleteMapping(value = "/topics/{id}")
-    public void deleteTopic(@PathVariable String id){
+    public ResponseEntity deleteTopic(@PathVariable String id){
         topicService.deleteTopic(id);
+        return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 }

@@ -16,27 +16,22 @@ public class TopicService {
     private TopicRepository topicRepository;
 
     public List<Topic> getTopics(){
-
-        List<Topic> topics = new ArrayList<>();
-        for (Topic topic: topicRepository.findAll()){
-            topics.add(topic);
-        }
-        return topics;
+        return topicRepository.findAll();
     }
 
     public Topic getTopic(String id){
         return topicRepository.findById(id).get();
     }
 
-    public void addTopic(Topic topic) {
-        topicRepository.save(topic);
+    public Topic addTopic(Topic topic) {
+        return topicRepository.save(topic);
     }
 
-    public void updateTopic(Topic newTopic, String id) {
+    public Topic updateTopic(Topic newTopic, String id) {
         Topic topic = topicRepository.findById(id).get();
         topic.setName(newTopic.getName());
         topic.setDescription(newTopic.getDescription());
-        topicRepository.save(topic);
+        return topicRepository.save(topic);
     }
 
     public void deleteTopic(String id) {
