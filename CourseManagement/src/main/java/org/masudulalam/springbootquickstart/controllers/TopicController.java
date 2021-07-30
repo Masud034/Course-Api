@@ -1,9 +1,10 @@
-package org.masudulalam.springbootquickstart.topic;
+package org.masudulalam.springbootquickstart.controllers;
 
+import org.masudulalam.springbootquickstart.entities.Topic;
+import org.masudulalam.springbootquickstart.services.TopicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Arrays;
 import java.util.List;
 
 @RestController

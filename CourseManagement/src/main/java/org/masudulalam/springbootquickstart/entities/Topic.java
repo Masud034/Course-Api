@@ -1,6 +1,16 @@
-package org.masudulalam.springbootquickstart.topic;
+package org.masudulalam.springbootquickstart.entities;
 
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
 public class Topic {
+    @Id
+    @GeneratedValue(generator = "system-uuid")
+    @GenericGenerator(name = "system-uuid", strategy = "uuid2")
     private String id;
     private String name;
     private String description;
@@ -33,7 +43,6 @@ public class Topic {
     public String getDescription() {
         return description;
     }
-
     public void setDescription(String description) {
         this.description = description;
     }
